@@ -5,10 +5,10 @@ public class VerificadorNumeros {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		verificadorNumeros(1, 1, 1);
-		verificadorNumeros(1, 1, 2);
-		verificadorNumeros(-1, -1, -1);
-		verificadorNumeros(1, 2, 3);
+//		verificadorNumeros(1, 1, 1);
+//		verificadorNumeros(1, 1, 2);
+//		verificadorNumeros(-1, -1, -1);
+		verificadorNumeros(0, 2, 3);
 
 
 	}

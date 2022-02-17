@@ -4,11 +4,11 @@ public class EjercicioMegaBytes {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		printMegaBytesAndKiloBytes(2500);
-		printMegaBytesAndKiloBytes(-1024);
+//		
+//		printMegaBytesAndKiloBytes(2500);
+//		printMegaBytesAndKiloBytes(-1024);
 		printMegaBytesAndKiloBytes(5000);
-		printMegaBytesAndKiloBytes(1000);
+//		printMegaBytesAndKiloBytes(1000);
 
 
 
