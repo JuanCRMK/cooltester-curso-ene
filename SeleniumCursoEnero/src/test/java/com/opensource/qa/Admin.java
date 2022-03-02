@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class Admin {
 
 	// Instancias de objeto
-	String username, password, msgNoRecords, userNotExist, newEmployee, newUser, newpassword;
+	String username, password, msgNoRecords, userNotExist, newEmployee, newUser, newpassword, msgDeleteRecord;
 
 	@BeforeTest
 	public void beforeTest() {
@@ -26,9 +26,10 @@ public class Admin {
 		password = "admin123";
 		userNotExist = "XYZ";
 		msgNoRecords = "No Records Found";
-		newEmployee = "";
-		newUser = "";
-		newpassword = "";
+		newEmployee = "Admin A";
+		newUser = "Juan Carlos Ram";
+		newpassword = "Hola12345678";
+		msgDeleteRecord = "Delete records?";
 
 	}
 
@@ -176,7 +177,7 @@ public class Admin {
 
 		// Step 5
 		Reporter.log("Click Add Button");
-		driver.findElement(By.xpath("//*[@id=\"btnAdd\"]]")).click();
+		driver.findElement(By.xpath("//input[@id='btnAdd']")).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		// Step 6
@@ -197,11 +198,13 @@ public class Admin {
 
 		// Step10
 		Reporter.log("Click Save");
-		driver.findElement(By.xpath("//*[@id=\"btnSave\"]")).click();
+		driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		
 
 		// Step 11
 		Reporter.log("Search username in field \"Username\"");
-		driver.findElement(By.id("searchSystemUser_userName")).sendKeys(username);
+		driver.findElement(By.xpath("//input[@id='searchSystemUser_userName']")).sendKeys(newUser);
 
 		// Step 12
 		Reporter.log("Click Search");
@@ -212,9 +215,9 @@ public class Admin {
 		Reporter.log("Verify username exist in table");
 
 		// AssertEquals
-		String actualValue = driver.findElement(By.xpath("//tbody/tr")).getText();
-		Assert.assertEquals(actualValue, msgNoRecords);
-
+		String actualValue = driver.findElement(By.xpath("//tbody/tr[1]/td[2]")).getText();
+		Assert.assertEquals(actualValue, newUser);
+		
 		// Step 14
 		Reporter.log("Log out");
 		driver.findElement(By.id("welcome")).click();
@@ -222,6 +225,102 @@ public class Admin {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		// Step 15
+		Reporter.log("Close Browser");
+		driver.close();
+
+	}
+
+	
+	@Test
+	public void tc004AdminDeleteUser() {
+
+		// Step 1
+		Reporter.log("Open Browser \"OrangeHRM\" web page");
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://opensource-demo.orangehrmlive.com/");
+		driver.manage().window().maximize();
+
+		// Step 2
+		Reporter.log("Enter Username, Password and click Login");
+		driver.findElement(By.id("txtUsername")).sendKeys(username);
+		driver.findElement(By.id("txtPassword")).sendKeys(password);
+		driver.findElement(By.id("btnLogin")).click();
+
+		// Step 3
+		Reporter.log("Validate that you have logged in successfully");
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='welcome']")));
+
+		// Step 4
+		Reporter.log("Click Admin - Go to the admin page");
+		driver.findElement(By.xpath("//a[@id='menu_admin_viewAdminModule']")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 5
+		Reporter.log("Search username in field \"Username\"");
+		driver.findElement(By.id("searchSystemUser_userName")).sendKeys(newUser);
+
+		// Step 6
+		Reporter.log("Click Search");
+		driver.findElement(By.id("searchBtn")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Seleccionar un campo obligatorio
+
+		// Step 7
+		Reporter.log("Verify username exist in table");
+		String actualValue = driver.findElement(By.xpath("//tbody/tr[1]/td[2]")).getText();
+		Assert.assertEquals(actualValue, newUser);
+
+		// Step 8
+		Reporter.log("Select User");
+		driver.findElement(By.xpath("//input[@name='chkSelectRow[]']")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 9
+		Reporter.log("Click Delete");
+		driver.findElement(By.xpath("//input[@id='btnDelete']")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 10
+		Reporter.log("Validate pop-window is displayed: \"Delete Records?\"");
+		String actualValue2 = driver
+				.findElement(By.xpath("//div[@class='modal hide in'][@id='deleteConfModal']/div[2]/p")).getText();
+		Assert.assertEquals(actualValue2, msgDeleteRecord);
+
+		// Step 11
+		Reporter.log("Click Ok to confirm delete user");
+		driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 12
+		Reporter.log("Search username in field \"Username\"");
+		driver.findElement(By.id("searchSystemUser_userName")).sendKeys(newUser);
+
+		// Step 13
+		Reporter.log("Click Search");
+		driver.findElement(By.id("searchBtn")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 14
+		Reporter.log("Validate in table that user was delete successfully");
+
+		// AssertEquals
+		String actualValue3 = driver.findElement(By.xpath("//tbody/tr")).getText();
+		Assert.assertEquals(actualValue3, msgNoRecords);
+
+		// AssertTrue
+		boolean isDisplayed = driver.findElement(By.xpath("//*[text()='" + msgNoRecords + "']")).isDisplayed();
+		Assert.assertTrue(isDisplayed);
+
+		// Step 15
+		Reporter.log("Log out");
+		driver.findElement(By.id("welcome")).click();
+		driver.findElement(By.xpath("//a[contains(@href, 'logout')]")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Step 16
 		Reporter.log("Close Browser");
 		driver.close();
 
