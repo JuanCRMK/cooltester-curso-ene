@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.facebook.ejercicioBasico">
+      <class name="com.opensource.qa.Admin">
         <methods>
           <include name="beforeTest"/>
           <include name="afterTest"/>
-          <include name="f"/>
+          <include name="tc003AdminAddNewUser"/>
         </methods>
-      </class> <!-- com.facebook.ejercicioBasico -->
+      </class> <!-- com.opensource.qa.Admin -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

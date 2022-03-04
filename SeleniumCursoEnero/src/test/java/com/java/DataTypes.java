@@ -3,6 +3,7 @@ package com.java;
 public class DataTypes {
 
 	public static void main(String[] args) {
+
 		// Datos primitivos
 
 		byte var1 = 1; // Numerico entero
@@ -12,8 +13,7 @@ public class DataTypes {
 		float var5 = 1.2f; // Numerico real
 		double var6 = 2.223; // Numerico real (decimales) - Automation
 		char var7 = 'a'; // Caracter - Automation
-		boolean var8 = true; // Boleano - Automation - tiene dos valores TRUE /
-								// FALSE
+		boolean var8 = true; // Boleano - Automation - tiene dos valores TRUE / FALSE
 
 		// Declarar variables
 		int x;
@@ -35,9 +35,10 @@ public class DataTypes {
 		System.out.println(message + symbol);
 
 		int numero = 1;
+		int numero2 = 2;
 		String nombre = "Ricardo";
-		System.out.println(nombre + numero);
-		
+		System.out.println(nombre + numero);		
+		System.out.println(numero2 +""+ numero);
 
 	}
 
