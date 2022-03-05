@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,11 +14,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+
 public class Admin {
 
 	// Instancias de objeto
 	String username, password, passwordIncorrect, msgNoRecords, userNotExist, newEmployee, newUser, newpassword,
 			msgDeleteRecord, userStatus, verifyMessage;
+
+	int x = (int) Math.floor(Math.random() * 90 + 1);
 
 	@BeforeTest
 	public void beforeTest() {
@@ -29,7 +35,7 @@ public class Admin {
 		userNotExist = "XYZ";
 		msgNoRecords = "No Records Found";
 		newEmployee = "Admin A";
-		newUser = "Juan Ram2";
+		newUser = "Juan Ram" + x;
 		newpassword = "Hola12345678";
 		msgDeleteRecord = "Delete records?";
 		userStatus = "Disabled";
@@ -203,9 +209,27 @@ public class Admin {
 		// Step10
 		Reporter.log("Click Save");
 		// Explicit wait
+//		WebDriverWait wait2 = new WebDriverWait(driver, 10);
+//		wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='btnSave']")));
+//		driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+
+		boolean jr1 = isElementPresent(By.xpath("//input[@id='btnSave']"));
 		WebDriverWait wait2 = new WebDriverWait(driver, 10);
-		wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='btnSave']")));
-		driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+
+		if (jr1 == false) {
+			wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='btnSave']")));
+			driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+		} else if (jr1 == true) {
+			driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+		} else {
+			wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='btnSave']")));
+			driver.findElement(By.xpath("//input[@id='btnSave']")).click();
+		}
+
+		// Dar clic en botón que no esta sincronizado con JAVASCRIPT
+//		WebElement element = driver.findElement(By.xpath("//input[@id='btnSave']"));
+//		JavascriptExecutor js = (JavascriptExecutor)driver;
+//		js.executeScript("arguments[0].click();",element);
 
 		// Step 11
 		Reporter.log("Search username in field \"Username\"");
@@ -233,6 +257,16 @@ public class Admin {
 		Reporter.log("Close Browser");
 		driver.close();
 
+	}
+
+	private boolean isElementPresent(By by) {
+		WebDriver driver = new ChromeDriver();
+		try {
+			driver.findElement(By.xpath("//input[@id='btnSave']"));
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
 	}
 
 	@Test
