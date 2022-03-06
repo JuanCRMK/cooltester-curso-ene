@@ -35,7 +35,7 @@ public class Admin {
 		userNotExist = "XYZ";
 		msgNoRecords = "No Records Found";
 		newEmployee = "Admin A";
-		newUser = "Juan Ram" + x;
+		newUser = "JC Ramirez1";
 		newpassword = "Hola12345678";
 		msgDeleteRecord = "Delete records?";
 		userStatus = "Disabled";

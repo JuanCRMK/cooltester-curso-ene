@@ -1,4 +1,7 @@
 {
 	"userNotExist":"XYZ",
-	"msgNoRecords": "No Records Found"
+	"msgNoRecords": "No Records Found",
+	"typeEmployee": "Admin A",
+	"msgDeleteRecord": "Delete records?",
+	"status": "Disable"
 }
