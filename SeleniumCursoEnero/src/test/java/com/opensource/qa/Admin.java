@@ -88,6 +88,10 @@ public class Admin {
 		Reporter.log("Verify username exist in table");
 		String actualValue = driver.findElement(By.xpath("//tbody/tr[1]/td[2]")).getText();
 		Assert.assertEquals(actualValue, username);
+		
+		//prueba para tabla
+		WebElement table = driver.findElement(By.xpath("//tbody"));
+		System.out.println(table.getSize());
 
 		// Step 8
 		Reporter.log("Log out");
@@ -142,6 +146,7 @@ public class Admin {
 		// AssertEquals
 		String actualValue = driver.findElement(By.xpath("//tbody/tr")).getText();
 		Assert.assertEquals(actualValue, msgNoRecords);
+	
 
 		// AssertTrue
 		boolean isDisplayed = driver.findElement(By.xpath("//*[text()='" + msgNoRecords + "']")).isDisplayed();

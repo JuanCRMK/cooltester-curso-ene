@@ -19,7 +19,7 @@ public class AdminPOM {
 	Base base;
 	Login login;
 	Admin admin;
-	String username, password, msgNoRecords, userNotExist, typeEmployee, newUser, newPassword, msgDeleteRecord, status;
+	String username, password, msgNoRecords, userNotExist, typeEmployee, newUser, newPassword, msgDeleteRecord, status, userSearch;
 	String jsonCredentials = "Credentials";
 	String jsonAdminTestData = "AdminTestData";
 
@@ -40,6 +40,7 @@ public class AdminPOM {
 		newPassword = base.getJSONData(jsonCredentials, "newPassword");
 		msgDeleteRecord = base.getJSONData(jsonAdminTestData, "msgDeleteRecord");
 		status = base.getJSONData(jsonAdminTestData, "status");
+		userSearch = base.getJSONData(jsonAdminTestData, "userSearch");
 
 	}
 
@@ -50,10 +51,10 @@ public class AdminPOM {
 		login.loginOrange(username, password);
 
 		// STEP 4, 5, 6
-		admin.searchUser(username);
+		admin.goTableAdmin();
 
 		// STEP 7
-		admin.validateUsernameTable(username);
+		admin.validateUsernameTable(userSearch);
 
 		// STEP 8, 9
 		login.logOut();
@@ -118,7 +119,7 @@ public class AdminPOM {
 	}
 	
 	@Test
-	public void tc006CreateUserDisablePOM() {
+	public void tc005CreateUserDisablePOM() {
 		// STEP 1, 2, 3
 		login.loginOrange(username, password);
 

@@ -3,5 +3,7 @@
 	"msgNoRecords": "No Records Found",
 	"typeEmployee": "Admin A",
 	"msgDeleteRecord": "Delete records?",
-	"status": "Disable"
+	"status": "Disable",
+	"userSearch": "Russel Hamilton",
+	"msgUserExists": "Already exists"
 }
