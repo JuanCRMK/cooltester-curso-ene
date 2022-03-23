@@ -124,7 +124,7 @@ public class AdminPOM {
 		login.loginOrange(username, password);
 
 		// STEP 4, 5, 6, 7, 8, 9, 10
-		admin.addUser(typeEmployee, newUser, newPassword, status);
+		admin.addUser(typeEmployee, newUser, newPassword);
 
 		// STEP 11, 12
 		admin.searchUser(newUser);

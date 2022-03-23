@@ -111,32 +111,7 @@ public class Admin extends Base {
 		}
 	}
 
-	public void addUser(String typeEmployee, String newUser, String newPwd, String status) {
-		reporterLog("Added new user..." + newUser);
-		click(lnkAdminHeader);
-		click(btnAdd);
-		type(txtTypeEmployee, typeEmployee);
-		type(txtNewUser, newUser);
-		click(addStatus);
-		String existe = getText(txtExists);
-		// crear metodo que evalue si existe usuario
-		type(txtNewPassword, newPwd);
-		type(txtConfirmPwd, newPwd);
-		String test = status;
-		System.out.println(test);
 
-		waitForElementPresent(btnSave);
-		boolean jr1 = isElementPresent(btnSave);
-
-		if (jr1 == false) {
-			waitForElementPresent(btnSave);
-			click(btnSave);
-		} else if (jr1 == true) {
-			click(btnSave);
-		} else {
-			click(btnSave);
-		}
-	}
 
 	private boolean isElementPresent(By by) {
 		WebDriver driver = new ChromeDriver();
